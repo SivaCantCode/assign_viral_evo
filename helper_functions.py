@@ -25,7 +25,7 @@ def jukes_cantor(reference_sequence: str, distant_sequence: str) -> float:
     length = 0
     mismatches = 0
 
-    # skip indels (and ambiguous bases like N), compare the rest
+    # skip indels  compare the rest
     for ref_nt, dist_nt in zip(reference_sequence.upper(), distant_sequence.upper()):
         if ref_nt not in nucleotides or dist_nt not in nucleotides:
             continue
