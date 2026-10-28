@@ -19,7 +19,30 @@ def jukes_cantor(reference_sequence: str, distant_sequence: str) -> float:
         For example 1.163.
 
     """
-    raise NotImplementedError()
+    import math
+
+    nucleotides = set("ACGT")
+    length = 0
+    mismatches = 0
+
+    # skip indels (and ambiguous bases like N), compare the rest
+    for ref_nt, dist_nt in zip(reference_sequence.upper(), distant_sequence.upper()):
+        if ref_nt not in nucleotides or dist_nt not in nucleotides:
+            continue
+        length += 1
+        if ref_nt != dist_nt:
+            mismatches += 1
+
+    if length == 0:
+        return 0.0
+
+    p = mismatches / length
+    if p >= 0.75:
+        return float("inf")
+
+    # JC distance is per site, scale back to the number of sites
+    d_per_site = -3 / 4 * math.log(1 - 4 / 3 * p)
+    return d_per_site * length
 
 
 def kimura_two_parameter(reference_sequence: str, distant_sequence: str) -> float:
