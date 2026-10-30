@@ -1,3 +1,4 @@
+import math
 def jukes_cantor(reference_sequence: str, distant_sequence: str) -> float:
     """The Jukes-Cantor correction for estimating genetic distances
     calculated with Hamming distance.
@@ -18,9 +19,7 @@ def jukes_cantor(reference_sequence: str, distant_sequence: str) -> float:
         The Jukes-Cantor corrected genetic distance using Hamming distance.
         For example 1.163.
 
-    """
-    import math
-
+    """  
     nucleotides = set("ACGT")
     length = 0
     mismatches = 0
